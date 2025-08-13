@@ -1,23 +1,32 @@
 @use "sass:math";
 @use "sass:string";
 
-html {
+body, html {
   height: 100%;
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #3a163e 0%, #000000 100%);
   overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+$star-colors: #fff, #f6b607, #add8e6, #881629;
+
+@function random-star-color() {
+  $index: math.random(length($star-colors)) - 1;
+  @return nth($star-colors, $index + 1);
 }
 
 @function multiple-box-shadow($n) {
-  $value: "#{math.random(2000)}px #{math.random(2000)}px #FFF";
+  $value: "#{math.random(3840)}px #{math.random(2160)}px #{random-star-color()}";
   @for $i from 2 through $n {
-    $value: "#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF";
+    $value: "#{$value} , #{math.random(3840)}px #{math.random(2160)}px #{random-star-color()}";
   }
   @return string.unquote($value);
 }
 
-$shadows-small: multiple-box-shadow(700);
-$shadows-medium: multiple-box-shadow(200);
-$shadows-big: multiple-box-shadow(100);
+$shadows-small: multiple-box-shadow(2200);
+$shadows-medium: multiple-box-shadow(600);
+$shadows-big: multiple-box-shadow(500);
 
 #stars {
   position: fixed;
@@ -29,7 +38,7 @@ $shadows-big: multiple-box-shadow(100);
   pointer-events: none;
   z-index: 0;
   box-shadow: $shadows-small;
-  animation: animStar 50s linear infinite;
+  animation: animStar 20s linear infinite;
 
   &:after {
     content: " ";
@@ -52,7 +61,7 @@ $shadows-big: multiple-box-shadow(100);
   pointer-events: none;
   z-index: 0;
   box-shadow: $shadows-medium;
-  animation: animStar 100s linear infinite;
+  animation: animStar 30s linear infinite;
 
   &:after {
     content: " ";
@@ -75,7 +84,7 @@ $shadows-big: multiple-box-shadow(100);
   pointer-events: none;
   z-index: 0;
   box-shadow: $shadows-big;
-  animation: animStar 150s linear infinite;
+  animation: animStar 40s linear infinite;
 
   &:after {
     content: " ";
@@ -93,20 +102,29 @@ $shadows-big: multiple-box-shadow(100);
     transform: translateY(0);
   }
   to {
-    transform: translateY(-2000px);
+    transform: translateY(-2160px);
   }
 }
 
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 95%;
+  max-width: 1800px;
+  height: 100%;
+  transform: translate(-50%, -50%); 
+}
+
 .Header {
-  position: fixed; 
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #05050500;
+  background-color: transparent; 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
   padding: 1.5rem 0;
-  text-align: center;
 }
 
 .Header nav a {
@@ -123,9 +141,11 @@ $shadows-big: multiple-box-shadow(100);
   bottom: -3px; 
   height: 2px;
   width: 0;
-  background-color: rgb(22, 22, 22);
+  background-color: #e11be1; 
   transition: width 0.3s ease;
   transform: translateX(-50%);
+  z-index: 10;
+  display: block; 
 }
 
 .Header nav a:hover::after {
@@ -140,10 +160,9 @@ main {
 }
 
 .info {
-  color: var(--foreground);
-  position: relative;
+  position: absolute;
   display: flex;
-  left: 75%;
+  left: 77%;
   font-weight: 700; 
   font-size: large;
 }
@@ -153,33 +172,45 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;    
+  text-align: center; 
+
   padding: 10px 20px;
   background-color: transparent;
   gap: 15px;
-  z-index: 10; // on top of stars
-}
-
-.profile-pic {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;         
-  object-fit: cover;           
-  display: block;
-  margin: 2rem auto;
-  transition: transform 0.3s ease;
-  -webkit-user-drag: none;
-}
-
-.profile-pic:hover {
-  transform: scale(1.05);
-  cursor: pointer;
+  z-index: 10; 
 }
 
 .aboutme-text {
-  color: #333;
-  font-size: 20px;
+  position: relative;
+  color: #fcf8f8;
+  font-size: clamp(16px, 1.9vw, 50px);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+}
+
+.highlight {
+  position: relative;
+  color: #c962ee;
+  font-size: clamp(16px, 1.9vw, 50px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+}
+
+
+.aboutme-text2 {
+  position: static;
+  display: block;
+  color: #fcf8f8;
+  font-size: clamp(16px, 1.9vw, 50px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; 
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }  
+  100% { transform: scale(1); }
 }
