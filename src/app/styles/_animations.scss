@@ -1,0 +1,168 @@
+@use "sass:math";
+@use "sass:string";
+@use "variables" as *;
+
+// Star animation functions (optimized)
+@function random-star-color() {
+  $index: math.random(length($star-colors)) - 1;
+  @return nth($star-colors, $index + 1);
+}
+
+@function multiple-box-shadow($n) {
+  $value: "#{math.random(3840)}px #{math.random(2160)}px #{random-star-color()}";
+  @for $i from 2 through $n {
+    $value: "#{$value} , #{math.random(3840)}px #{math.random(2160)}px #{random-star-color()}";
+  }
+  @return string.unquote($value);
+}
+
+// Optimized shadow counts - distributed across more layers for better performance
+$shadows-tiny: multiple-box-shadow(700);
+$shadows-small: multiple-box-shadow(600);
+$shadows-medium: multiple-box-shadow(450);
+$shadows-big: multiple-box-shadow(300);
+$shadows-large: multiple-box-shadow(200);
+
+// Star animations - only visible in home section
+.home-section {
+  // Tiny distant stars (0.5px)
+  #stars0 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.5px;
+    height: 0.5px;
+    background: transparent;
+    pointer-events: none;
+    z-index: $z-background;
+    box-shadow: $shadows-tiny;
+    animation: animStar 50s linear infinite;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 0.5px;
+      height: 0.5px;
+      background: transparent;
+      box-shadow: $shadows-tiny;
+    }
+  }
+
+  // Small stars (1px)
+  #stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    pointer-events: none;
+    z-index: $z-background;
+    box-shadow: $shadows-small;
+    animation: animStar 35s linear infinite;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: $shadows-small;
+    }
+  }
+
+  // Medium stars (2px)
+  #stars2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    pointer-events: none;
+    z-index: $z-background;
+    box-shadow: $shadows-medium;
+    animation: animStar 25s linear infinite;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: $shadows-medium;
+    }
+  }
+
+  // Big stars (3px)
+  #stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    pointer-events: none;
+    z-index: $z-background;
+    box-shadow: $shadows-big;
+    animation: animStar 20s linear infinite;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: $shadows-big;
+    }
+  }
+
+  // Large bright stars (4px)
+  #stars4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background: transparent;
+    pointer-events: none;
+    z-index: $z-background;
+    box-shadow: $shadows-large;
+    animation: animStar 15s linear infinite;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow: $shadows-large;
+    }
+  }
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2160px);
+  }
+}
+
+// Text animations
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }  
+  100% { transform: scale(1); }
+}
+
+.aboutme-text2 {
+  animation: pulse 2s infinite ease-in-out;
+}
+

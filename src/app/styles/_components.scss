@@ -1,0 +1,395 @@
+@use "variables" as *;
+
+// Base layout
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: $primary-gradient;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth; 
+}
+
+// Container (unified definition)
+.container {
+  width: 95%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: $container-padding 0;
+  position: relative;
+}
+
+// Main content
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+}
+
+// Link hover effect mixin
+%link-hover-effect {
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;  
+    bottom: -3px; 
+    height: 2px;
+    width: 0;
+    background-color: $accent-color;
+    transition: width $transition-medium ease;
+    transform: translateX(-50%);
+    display: block;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+// Navbar
+.Navbar {
+  position: sticky;     
+  top: 0;              
+  left: 0;
+  width: 100%;
+  z-index: $z-navbar;       
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  background-color: rgba(37, 37, 37, 0.155); 
+  backdrop-filter: blur(10px);
+  font-family: $font-stack;
+  padding: $navbar-padding;          
+  box-sizing: border-box;      
+
+  nav a {
+    position: relative;
+    color: $text-secondary;
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-size: 18px;
+    font-weight: 600;
+    
+    @extend %link-hover-effect;
+  }
+}
+
+.info {
+  position: absolute;
+  display: flex;
+  left: 70%;
+  font-size: large;
+  
+  @media (max-width: $mobile) {
+    position: static;
+    left: auto;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+// Home section
+.home-section {
+  position: relative;
+  min-height: 90vh;
+  width: 100%;
+  background: $secondary-gradient;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.aboutmebox {
+  position: relative;
+  display: flex;
+  top: -50px;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;    
+  text-align: center;
+  padding: 10px 20px;
+  gap: 15px;
+  z-index: $z-content;
+  
+  @media (max-width: $mobile) {
+    top: 0;
+    padding: 20px 10px;
+    gap: 10px;
+  }
+}
+
+.aboutme-text {
+  color: $text-primary;
+  font-size: clamp(16px, 2.7vw, 70px);
+  font-family: $font-stack;
+  margin: 0;
+}
+
+.highlight {
+  color: $highlight-color;
+  font-size: clamp(16px, 2.7vw, 70px);
+  font-family: $font-stack;
+}
+
+.aboutme-text2 {
+  display: block;
+  color: $text-primary;
+  font-size: clamp(16px, 1.7vw, 40px);
+  font-family: $font-stack;
+  margin: 0;
+  font-weight: 700;
+}
+
+.Line {
+  width: min(425px, 90vw);
+  margin: 0;
+  border: none;
+  border-bottom: 2.1px solid $accent-color;
+}
+
+.links {
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  text-align: center; 
+  gap: 2rem;
+  font-family: $font-stack;
+
+  a {
+    color: $text-primary;
+    text-decoration: none;
+    font-size: clamp(16px, 1.1vw, 30px);
+    
+    @extend %link-hover-effect;
+  }
+}
+
+// Section base styles
+section {
+  min-height: 100vh;
+  width: 100%;
+  padding: $section-padding;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: $font-stack;
+
+  h1, h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    
+    @media (max-width: $mobile) {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  p {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    
+    @media (max-width: $mobile) {
+      font-size: 1rem;
+      max-width: 90%;
+    }
+  }
+}
+
+// Skills section
+.skills-section {
+  background: rgb(40, 40, 40);
+  color: $text-primary;
+  padding: 6rem 2rem;
+
+  .skills-container {
+    min-width: 1600px;
+    margin: 1 auto;
+    text-align: left;
+    border: 2px solid $skills-border;
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .skills-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-bottom: 3rem;
+    color: $text-primary;
+    font-weight: 700;
+    text-align: left;
+    width: 100%;
+  }
+
+  .skills-category {
+    margin-bottom: 3rem;
+    flex: 1;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    
+    .category-title {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      color: $skills-border;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .skills-grid {
+      padding: 2rem;
+      background: rgb(20, 20, 20);
+      border-radius: 30px;
+      border: 2px solid $skills-border;
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      
+      .skills-tags-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.3rem;
+        align-content: start;
+        min-height: 300px;
+      }
+      
+      @media (max-width: $mobile) {
+        padding: 1rem;
+        
+        .skills-tags-container {
+          grid-template-columns: 1fr;
+          gap: 0.8rem;
+        }
+      }
+    }
+
+    .skill-tag {
+      background: rgba(40, 40, 40, 0.9);
+      border: 2px solid $skills-border;
+      color: $text-primary;
+      padding: 0.8rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all $transition-medium ease;
+      backdrop-filter: blur(10px);
+      cursor: default;
+      max-width: 140px;
+      flex-shrink: 0;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      
+      .skill-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        filter: brightness(1.2);
+        transition: all $transition-medium ease;
+      }
+      
+      &:hover {
+        transform: translateY(-3px) scale(1.05);
+        background: linear-gradient(135deg, $skills-border 0%, rgba(45, 165, 87, 0.8) 100%);
+        border-color: lighten($skills-border, 20%);
+        box-shadow: 0 8px 25px rgba(45, 165, 87, 0.3);
+        color: #ffffff;
+        
+        .skill-icon {
+          filter: brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.3));
+          transform: scale(1.1);
+        }
+      }
+      
+      @media (max-width: $mobile) {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        min-width: 80px;
+        gap: 0.3rem;
+        
+        .skill-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+
+// Projects section
+.projects-section {
+  background: rgb(60, 60, 60) !important;
+  color: $text-primary;
+  padding: 6rem 2rem;
+  min-height: 50vh;
+
+  h2 {
+    color: $projects-title;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 1.2rem;
+  }
+}
+
+// Contact section
+.contact-section {
+  background: rgb(55, 55, 55) !important;
+  color: $text-primary;
+  padding: 6rem 2rem;
+  min-height: 50vh;
+
+  h2 {
+    color: $contact-title;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    color: $text-light;
+  }
+}
+
+// Responsive design
+@media (max-width: $mobile) {
+  .Navbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    
+    nav a {
+      margin: 0 0.5rem;
+      font-size: 16px;
+    }
+  }
+  
+  .container {
+    width: 98%;
+    padding: 1rem 0;
+  }
+  
+  .home-section {
+    min-height: 80vh;
+  }
+}
+}
