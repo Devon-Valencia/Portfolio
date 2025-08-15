@@ -212,7 +212,7 @@ section {
 
   .skills-container {
     min-width: 1600px;
-    margin: 1 auto;
+    margin: 0 auto;
     text-align: left;
     border: 2px solid $skills-border;
     border-radius: 12px;
@@ -240,7 +240,6 @@ section {
     display: flex;
     flex-direction: column;
 
-    
     .category-title {
       font-size: clamp(1.2rem, 2.5vw, 1.8rem);
       color: $skills-border;
@@ -331,11 +330,11 @@ section {
       }
     }
   }
-
+}
 
 // Projects section
 .projects-section {
-  background: rgb(60, 60, 60) !important;
+  background: rgb(60, 60, 60);
   color: $text-primary;
   padding: 6rem 2rem;
   min-height: 50vh;
@@ -354,7 +353,7 @@ section {
 
 // Contact section
 .contact-section {
-  background: rgb(55, 55, 55) !important;
+  background: rgb(55, 55, 55);
   color: $text-primary;
   padding: 6rem 2rem;
   min-height: 50vh;
@@ -391,5 +390,4 @@ section {
   .home-section {
     min-height: 80vh;
   }
-}
 }
