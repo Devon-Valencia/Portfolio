@@ -7,6 +7,12 @@ $text-primary: #ffffff;
 $text-secondary: #f6f6f6;
 $text-muted: #ddd;
 $text-light: #ccc;
+$skills-background: linear-gradient(135deg, rgb(172, 105, 11) 0%, rgba(26, 5, 113) 100%);
+$skills-text: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(26, 170, 209, 0.8) 100%);
+$projects-background: linear-gradient(135deg, rgb(6, 123, 49) 0%, rgb(5, 114, 126) 100%);
+$contact-background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(148, 7, 7) 100%);
+$contact-text: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+
 
 // Background Colors
 $bg-skills: #202f3f;
@@ -18,7 +24,7 @@ $bg-skills-hover: #121a29;
 $star-colors: #d86f0c, #fff, #360bb96a, #a627e1;
 
 // Section Colors
-$projects-title: #ff6f61;
+$projects-title: #ffffff;
 $contact-title: #4aff8b;
 $skills-border: #2da557;
 
@@ -44,3 +50,4 @@ $z-navbar: 1000;
 $transition-fast: 0.3s;
 $transition-medium: 0.6s;
 $transition-slow: 1s;
+

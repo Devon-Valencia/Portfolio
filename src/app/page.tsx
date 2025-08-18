@@ -1,6 +1,7 @@
 import './styles/global.scss';
-import Navbar from "./components/navbar"; 
- 
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
+import ContactForm from "./components/ContactForm";
 
 export default function Home() {
   return (
@@ -23,16 +24,15 @@ export default function Home() {
               <p className='aboutme-text2'>Full Stack Software Engineer</p>
               <hr className='Line'/>
               <div className='links'>
-                <a href="#contact">Contact</a>
+                <a className='contact' href="#contact">Contact</a>
               </div>
             </div>
           </div>
         </section>
 
         <section id="skills" className="skills-section" aria-label="Technical Skills">
+          <h2 className="skills-title">Skills</h2>
           <div className="skills-container">
-            <h2 className="skills-title">Technical Skills</h2>
-            
             <div className="skills-category">
               <h3 className="category-title">Frontend Development</h3>
               <div className="skills-grid">
@@ -124,6 +124,10 @@ export default function Home() {
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postcss/postcss-original.svg" alt="PostCSS" className="skill-icon" />
                   PostCSS
                 </span>
+                <span className="skill-tag">
+                  <img src="https://exafunction.github.io/public/brand/windsurf-black-symbol.svg" alt="Windsurf" className="skill-icon" />
+                  Cascade
+                </span>
               </div>
             </div>
 
@@ -148,14 +152,43 @@ export default function Home() {
         </section>
 
         <section id="projects" className="projects-section" aria-label="Portfolio Projects">
-          <h2>Projects</h2>
-          <p>Project details go here...</p>
+          <h2 className="projects-title"> My Projects</h2>
+          <div className="projects-container">
+              <div className="project-card">
+                <h3 className="project-desc-title">
+                  <span className="project-desc-title-span">Ani</span>
+                  <span className="project-desc-title-span2">Quest</span>
+                </h3>
+                <img src="https://raw.githubusercontent.com/Devon-Valencia/Anime-App/main/frontend/public/landingpage.png" alt="Project 1" className="project-image1" />
+                <p className="project-desc">This was my first full-stack project. It was a anime tracking app that allowed users to search for anime and favorite them.</p>
+                <a href="https://github.com/Devon-Valencia/Anime-App" target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>
+              </div>
+          </div>
         </section>
 
         <section id="contact" className="contact-section" aria-label="Contact Information">
-          <h2>Contact</h2>
-          <p>Contact form or details go here...</p>
+          <div className="contact-container">
+            <h2 className="contact-title">Get In Touch</h2>
+            <p className="contact-subtitle">Let's connect and discuss opportunities</p>
+            
+            <div className="contact-content">
+              <div className="contact-info">
+                <h3>Contact Information</h3>
+                <div className="contact-item">
+                  <span className="contact-label">Email:</span>
+                  <a href="mailto:devonval06@gmail.com" className="contact-link">devonval06@gmail.com</a>
+                </div>
+                <div className="contact-item">
+                  <span className="contact-label">Phone:</span>
+                  <a href="tel:970-652-4374" className="contact-link">970-652-4374</a>
+                </div>
+              </div>
+              
+              <ContactForm />
+            </div>
+          </div>
         </section>
+        <Footer />
       </main>
     </>
   );
