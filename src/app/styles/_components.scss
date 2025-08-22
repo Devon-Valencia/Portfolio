@@ -308,8 +308,11 @@ section {
         -webkit-mask: 
           linear-gradient(#fff 0 0) content-box, 
           linear-gradient(#fff 0 0);
+        mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
-                mask-composite: exclude; 
+        mask-composite: exclude; 
         pointer-events: none;
       }
     }
@@ -373,7 +376,7 @@ section {
 .projects-section {
   background: $projects-background;
   color: $text-primary;
-  padding: 6rem 2rem;
+  padding: 3rem 2rem;
   max-height: 100vh;
 
   .projects-title {
@@ -425,6 +428,13 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   gap: 1rem;
   max-width: 450px; 
+  transition: all $transition-medium ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  transition: all $transition-medium ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .project-desc-title {
@@ -632,7 +642,6 @@ section {
 .form-submit {
   background: linear-gradient(135deg, $accent-color 0%, lighten($accent-color, 10%) 100%);
   color: white;
-  border: none;
   padding: 1rem 2rem;
   border-radius: 10px;
   font-size: 1.1rem;

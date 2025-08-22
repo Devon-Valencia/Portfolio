@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import ContactForm from "./components/ContactForm";
 
+
 export default function Home() {
   return (
     <>
@@ -159,7 +160,7 @@ export default function Home() {
                   <span className="project-desc-title-span">Ani</span>
                   <span className="project-desc-title-span2">Quest</span>
                 </h3>
-                <img src="https://raw.githubusercontent.com/Devon-Valencia/Anime-App/main/frontend/public/landingpage.png" alt="Project 1" className="project-image1" />
+                <img src="https://raw.githubusercontent.com/Devon-Valencia/Anime-App/main/frontend/public/landingpage.png" alt="AniQuest Project Screenshots" className="project-image1" />
                 <p className="project-desc">This was my first full-stack project. It was a anime tracking app that allowed users to search for anime and favorite them.</p>
                 <a href="https://github.com/Devon-Valencia/Anime-App" target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>
               </div>

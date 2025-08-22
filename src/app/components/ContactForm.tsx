@@ -1,38 +1,37 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from 'react';
 
 export default function ContactForm() {
   const [status, setStatus] = useState({ message: '', type: '' });
-  const [isInitialized, setIsInitialized] = useState(false);
 
-  useEffect(() => {
-    if (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
-      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-      setIsInitialized(true);
-    }
-  }, []);
-
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ message: 'Sending...', type: 'sending' });
 
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        e.target as HTMLFormElement
-      )
-      .then(
-        () => {
-          setStatus({ message: 'Message sent successfully!', type: 'success' });
-          (e.target as HTMLFormElement).reset();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        (error) => {
-          setStatus({ message: `Failed to send: ${error.text || 'An unknown error occurred.'}`, type: 'error' });
-        }
-      );
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ message: 'Message sent successfully!', type: 'success' });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus({ message: `Failed to send: ${result.message || 'An unknown error occurred.'}`, type: 'error' });
+      }
+    } catch (error) {
+      setStatus({ message: 'Failed to send: An unexpected error occurred.', type: 'error' });
+    }
   };
 
   return (
@@ -58,7 +57,10 @@ export default function ContactForm() {
         <textarea id="message" name="message" className="form-textarea" rows={5} required></textarea>
       </div>
       
-      <button type="submit" className="form-submit" disabled={!isInitialized || status.type === 'sending'}>
+      <button 
+        type="submit" 
+        className="form-submit" 
+        disabled={status.type === 'sending'}>
         {status.type === 'sending' ? 'Sending...' : 'Send Message'}
       </button>
       {status.message && <p className={`form-status ${status.type}`}>{status.message}</p>}
